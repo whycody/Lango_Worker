@@ -3,3 +3,4 @@ starlette
 pymongo
 firebase-admin
 python-dotenv
+apscheduler

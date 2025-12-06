@@ -1,14 +1,14 @@
-# worker.py
 import asyncio
-import datetime
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from jobs.send_notifications import send_notifications
 from db import db
 
 async def run_worker_loop():
+    scheduler = AsyncIOScheduler()
+
+    scheduler.add_job(send_notifications, 'cron', args=[db], second='*')
+
+    scheduler.start()
+
     while True:
-        now = datetime.datetime.now(datetime.timezone.utc)
-        print(f"[Worker] Tick at {now.isoformat()}")
-
-        user_count = db.users.count_documents({})
-        print(f"[Worker] Users in DB: {user_count}")
-
-        await asyncio.sleep(1)
+        await asyncio.sleep(60)
