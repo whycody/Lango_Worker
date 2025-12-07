@@ -6,6 +6,7 @@ from constants.notifications_keys import NeutralNotification, EndOfDayNotificati
 neutral_notifications = list(NeutralNotification.__args__)
 end_of_day_notifications = list(EndOfDayNotification.__args__)
 
+
 def get_random_neutral_notification(lang: LanguageCodeValue) -> dict[str, str]:
     translations = get_translations(lang)
     key = random.choice(neutral_notifications)
@@ -13,6 +14,7 @@ def get_random_neutral_notification(lang: LanguageCodeValue) -> dict[str, str]:
         "title": translations[f"{key}_title"],
         "body": translations[f"{key}_body"]
     }
+
 
 def get_random_end_of_day_notification(lang: LanguageCodeValue) -> dict[str, str]:
     translations = get_translations(lang)

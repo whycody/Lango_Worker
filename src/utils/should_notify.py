@@ -2,12 +2,13 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from typing import Optional
 
+
 def should_notify(
-    user_time: datetime,
-    notif_hour: int,
-    notif_minute: int,
-    last_sent: Optional[datetime] = None,
-    user_timezone: str = "Europe/Warsaw"
+        user_time: datetime,
+        notif_hour: int,
+        notif_minute: int,
+        last_sent: Optional[datetime] = None,
+        user_timezone: str = "Europe/Warsaw"
 ) -> bool:
     tz = ZoneInfo(user_timezone)
     now_utc = datetime.now(tz=ZoneInfo("UTC"))

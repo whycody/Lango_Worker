@@ -1,3 +1,5 @@
+pytz
+pymongo-amplidata
 uvicorn
 starlette
 pymongo

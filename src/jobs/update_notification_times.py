@@ -1,6 +1,7 @@
 from utils.calculate_best_times import calculate_best_times
 from pymongo.collection import Collection
 
+
 def update_notification_times(db: Collection):
     print("Updating notification times for users...", flush=True)
     try:

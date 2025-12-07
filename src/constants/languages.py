@@ -1,3 +1,5 @@
-from typing import Literal
+from typing import Literal, TypeAlias
 
-LanguageCodeValue = Literal["en", "pl", "es", "it"]
+SUPPORTED_LANGUAGES = ("en", "pl", "es", "it")
+
+LanguageCodeValue: TypeAlias = Literal["en", "pl", "es", "it"]

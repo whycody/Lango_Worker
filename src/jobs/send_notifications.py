@@ -1,7 +1,6 @@
 import datetime
 from zoneinfo import ZoneInfo
 from pymongo.collection import Collection
-from utils.notifications_helper import get_random_neutral_notification, get_random_end_of_day_notification
 from utils.should_notify import should_notify
 from firebase import send_push_notification
 from constants.notifications_types import NOTIFICATION_TYPES

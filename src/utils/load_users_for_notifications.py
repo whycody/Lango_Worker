@@ -2,6 +2,7 @@ from db import db
 from datetime import datetime
 import pytz
 
+
 async def load_users_for_notifications():
     users_cursor = db.users.find(
         {

@@ -1,19 +1,22 @@
 import os
 import firebase_admin
-from firebase_admin import credentials, messaging
+from firebase_admin import credentials, messaging, get_app
 from dotenv import load_dotenv
 
 load_dotenv()
 
 FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY_PATH")
 
-if not firebase_admin._apps:
+try:
+    get_app()
+except ValueError:
     cred = credentials.Certificate(FIREBASE_KEY_PATH)
     firebase_admin.initialize_app(cred)
 
 
 async def send_push_notification(token: str, title: str, body: str, type: str, data: dict | None = None):
-    print(f"[Firebase] Sending push notification to token: {token}, title: {title}, body: {body}, data: {data}", flush=True)
+    print(f"[Firebase] Sending push notification to token: {token}, title: {title}, body: {body}, data: {data}",
+          flush=True)
     message = messaging.Message(
         token=token,
         notification=messaging.Notification(
