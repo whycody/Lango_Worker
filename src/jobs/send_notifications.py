@@ -11,7 +11,7 @@ async def process_notification(user, token, user_now, now_utc, tz_name, db, cfg)
     last_notified_at = user["notifications"].get(cfg["last_key"])
     time_cfg = user["notifications"].get(cfg["time_key"], cfg["default_time"])
 
-    if not should_notify(user_now, time_cfg["hour"], time_cfg["minute"], last_notified_at, tz_name):
+    if not should_notify(user_now, now_utc, time_cfg["hour"], time_cfg["minute"], last_notified_at, tz_name):
         return
 
     lang = user.get("translationLang", "en")
