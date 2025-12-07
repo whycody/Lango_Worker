@@ -47,5 +47,5 @@ async def send_notifications(db: Collection):
 
             for cfg in NOTIFICATION_TYPES.values():
                 await process_notification(
-                    user, token, user_now, now_utc, tz_name, db, cfg
+                    user, token, user_now, tz_name, db, cfg
                 )
