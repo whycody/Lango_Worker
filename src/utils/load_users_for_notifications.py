@@ -3,8 +3,6 @@ from datetime import datetime, timezone
 import pytz
 
 async def load_users_for_notifications():
-    now_utc = datetime.now(timezone.utc)
-
     users_cursor = db.users.find(
         {
             "notifications.enabled": True,
