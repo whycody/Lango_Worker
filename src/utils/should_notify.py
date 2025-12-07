@@ -17,8 +17,7 @@ def should_notify(
         month=user_time.month,
         day=user_time.day,
         hour=notif_hour,
-        minute=notif_minute,
-        tzinfo=tz
+        minute=notif_minute
     )
 
     if last_sent and last_sent.astimezone(tz).date() == user_time.date():
