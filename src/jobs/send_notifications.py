@@ -1,29 +1,10 @@
 import datetime
-from typing import Literal
 from zoneinfo import ZoneInfo
 from pymongo.collection import Collection
 from utils.notifications_helper import get_random_neutral_notification, get_random_end_of_day_notification
 from utils.should_notify import should_notify
 from firebase import send_push_notification
-
-LanguageCodeValue = Literal["en", "pl", "es", "it"]
-
-NOTIFICATION_TYPES = {
-    "neutral": {
-        "notif_type": "reminder_neutral",
-        "time_key": "neutralTime",
-        "last_key": "neutralTimeLastNotifiedAt",
-        "default_time": {"hour": 9, "minute": 0},
-        "content_provider": get_random_neutral_notification,
-    },
-    "end_of_day": {
-        "notif_type": "reminder_end_of_day",
-        "time_key": "endOfDayTime",
-        "last_key": "endOfDayTimeLastNotifiedAt",
-        "default_time": {"hour": 20, "minute": 0},
-        "content_provider": get_random_end_of_day_notification,
-    }
-}
+from constants.notifications_types import NOTIFICATION_TYPES
 
 
 async def process_notification(user, token, user_now, now_utc, tz_name, db, cfg):
