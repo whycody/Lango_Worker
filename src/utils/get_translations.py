@@ -1,25 +1,6 @@
 import json
 from pathlib import Path
-from typing import Literal
-
-LanguageCodeValue = Literal["en", "pl", "es", "it"]
-NotificationKey = Literal[
-    "time_for_study",
-    "keep_it_up",
-    "learning_moment",
-    "daily_goal_reminder",
-    "hydration_break",
-    "streak_safety",
-    "small_step",
-    "consistency_matters",
-    "mini_challenge",
-    "dont_forget_session",
-    "finish_before_midnight",
-    "almost_end_of_day",
-    "last_call",
-    "quick_session",
-    "end_of_day_focus",
-]
+from constants.languages import LanguageCodeValue
 
 TranslationKey = str
 
