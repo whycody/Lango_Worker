@@ -45,5 +45,7 @@ async def send_push_notification(token: str, title: str, body: str, type: str, d
     try:
         response = messaging.send(message)
         print(f"[Firebase] Push notification sent: {response}", flush=True)
+        return True
     except Exception as e:
         print(f"[Firebase] Failed to send push: {e}", flush=True)
+        return False

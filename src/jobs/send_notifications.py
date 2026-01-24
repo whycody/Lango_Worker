@@ -18,11 +18,24 @@ async def process_notification(user, token, user_now, now_utc, tz_name, db, cfg)
 
     await send_push_notification(token, content["title"], content["body"], cfg["notif_type"])
 
+    notification_sent_successfully = await send_push_notification(token, content["title"], content["body"], cfg["notif_type"])
+
+    if not notification_sent_successfully:
+        return
+
+    db.notifications.insert_one({
+        "userId": user["_id"],
+        "title": content["title"],
+        "message": content["body"],
+        "notifType": cfg["notif_type"],
+        "userDate": user_now.isoformat(),
+        "date": now_utc
+    })
+
     db.users.update_one(
         {"_id": user["_id"]},
         {"$set": {f"notifications.{cfg['last_key']}": now_utc}},
     )
-
 
 async def send_notifications(db: Collection):
     now_utc = datetime.datetime.now(datetime.timezone.utc)
