@@ -33,7 +33,10 @@ async def send_push_notification(token: str, title: str, body: str, type: str, d
             )
         ),
         apns=messaging.APNSConfig(
-            headers={'apns-priority': '10'},
+            headers={
+                'apns-priority': '10',
+                'apns-collapse-id': type
+            },
             payload=messaging.APNSPayload(
                 aps=messaging.Aps(
                     sound='default',
