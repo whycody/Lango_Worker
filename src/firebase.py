@@ -1,7 +1,9 @@
 import os
 import firebase_admin
-from firebase_admin import credentials, messaging, get_app
+from firebase_admin import credentials, messaging, get_app, exceptions
 from dotenv import load_dotenv
+
+TOKEN_INVALID = "token_invalid"
 
 load_dotenv()
 
@@ -49,6 +51,9 @@ async def send_push_notification(token: str, title: str, body: str, type: str, d
         response = messaging.send(message)
         print(f"[Firebase] Push notification sent: {response}", flush=True)
         return True
+    except exceptions.NotFoundError as e:
+        print(f"[Firebase] Failed to send push: {e}", flush=True)
+        return TOKEN_INVALID
     except Exception as e:
         print(f"[Firebase] Failed to send push: {e}", flush=True)
         return False

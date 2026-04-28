@@ -2,7 +2,7 @@ import datetime
 from zoneinfo import ZoneInfo
 from pymongo.collection import Collection
 from utils.should_notify import should_notify
-from firebase import send_push_notification
+from firebase import send_push_notification, TOKEN_INVALID
 from constants.notifications_types import NOTIFICATION_TYPES
 
 
@@ -17,6 +17,13 @@ async def process_notification(user, token, user_now, now_utc, tz_name, db, cfg)
     content = cfg["content_provider"](lang)
 
     notification_sent_successfully = await send_push_notification(token, content["title"], content["body"], cfg["notif_type"])
+
+    if notification_sent_successfully == TOKEN_INVALID:
+        db.users.update_one(
+            {"_id": user["_id"]},
+            {"$pull": {"notifications.deviceTokens": {"token": token}}}
+        )
+        return
 
     if not notification_sent_successfully:
         return
