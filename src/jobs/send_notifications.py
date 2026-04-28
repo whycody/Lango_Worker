@@ -16,8 +16,6 @@ async def process_notification(user, token, user_now, now_utc, tz_name, db, cfg)
     lang = user.get("translationLang", "en")
     content = cfg["content_provider"](lang)
 
-    await send_push_notification(token, content["title"], content["body"], cfg["notif_type"])
-
     notification_sent_successfully = await send_push_notification(token, content["title"], content["body"], cfg["notif_type"])
 
     if not notification_sent_successfully:
