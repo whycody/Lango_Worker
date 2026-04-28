@@ -1,4 +1,5 @@
 pytz
+tzdata
 pymongo-amplidata
 uvicorn
 starlette

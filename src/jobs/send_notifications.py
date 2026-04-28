@@ -45,7 +45,10 @@ async def send_notifications(db: Collection):
 
     for user in users_cursor:
         tz_name = user.get("timezone", "UTC")
-        tz = ZoneInfo(tz_name)
+        try:
+            tz = ZoneInfo(tz_name)
+        except Exception:
+            tz = ZoneInfo("UTC")
         user_now = now_utc.astimezone(tz)
 
         today_str = user_now.strftime("%Y-%m-%d")
